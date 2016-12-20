@@ -38,7 +38,7 @@
             storeConfig(configId, config);
 
             script.setAttribute('async', 'true');
-            script.setAttribute('src', 'https://inhabit-widget-features.azurewebsites.net/js/ark-main.js');
+            script.setAttribute('src', '//widgetapi-inhabit.as.arkadiumhosted.com/Widget/v1');
             script.setAttribute('data-ark-configuration', '__ark_app__:' + configId);
             script.setAttribute('data-ark-contextual-url', contextual);
             container.appendChild(script);
