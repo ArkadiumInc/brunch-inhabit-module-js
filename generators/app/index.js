@@ -2,16 +2,16 @@
  * Created by Wishm on 12/19/2016.
  */
 'use strict';
-var yeoman = require('yeoman-generator');
-var chalk = require('chalk');
-var yosay = require('yosay');
+let yeoman = require('yeoman-generator');
+let chalk = require('chalk');
+let yosay = require('yosay');
 
 module.exports = yeoman.Base.extend({
     prompting: function () {
         // Have Yeoman greet the user.
         this.moduleName = "helloWorld";
 
-        var prompts = [{
+        let prompts = [{
             type: 'input',
             name: 'moduleName',
             message: 'Enter name of your module, camelCased without numbers or special symbols, only letters',
@@ -20,7 +20,6 @@ module.exports = yeoman.Base.extend({
 
         return this.prompt(prompts).then(function (props) {
             // To access props later use this.props.someAnswer;
-            this.props = props;
             this.moduleName = props.moduleName;
             this.templateReplace =
                 {
@@ -32,18 +31,13 @@ module.exports = yeoman.Base.extend({
 
     writing: function () {
         this.fs.copyTpl(
-            this.templatePath('project/public'),
-            this.destinationPath('public'),
+            this.templatePath('project/app/assets'),
+            this.destinationPath('app/assets'),
             this.templateReplace
         );
         this.fs.copyTpl(
-            this.templatePath('project/src/defaultConfiguration.js'),
-            this.destinationPath('src/defaultConfiguration.js'),
-            this.templateReplace
-        );
-        this.fs.copyTpl(
-            this.templatePath('project/webpack.config.js'),
-            this.destinationPath('webpack.config.js'),
+            this.templatePath('project/brunch-config.js'),
+            this.destinationPath('brunch-config.js'),
             this.templateReplace
         );
         this.fs.copyTpl(
@@ -58,18 +52,13 @@ module.exports = yeoman.Base.extend({
         );
 
         this.fs.copyTpl(
-            this.templatePath('project/src/HelloworldModule.js'),
-            this.destinationPath('src/' + this.moduleName + 'Module.js'),
-            this.templateReplace
-        );
-        this.fs.copyTpl(
-            this.templatePath('project/src/helloWorldView.hbs'),
-            this.destinationPath('src/' + this.moduleName + 'View.hbs'),
+            this.templatePath('project/app/my-module.js'),
+            this.destinationPath('app/' + this.moduleName + '.js'),
             this.templateReplace
         );
     },
 
     install: function () {
-        this.installDependencies();
+        this.npmInstall();
     }
 });

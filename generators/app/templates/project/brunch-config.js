@@ -1,12 +1,12 @@
 module.exports = {
   modules: {
     autoRequire: {
-      'my-module.js': [ 'my-module.js' ]
+      '<%= name %>.js': [ '<%= name %>.js' ]
     }
   },
   files: {
     javascripts: {
-      joinTo: 'my-module.js'
+      joinTo: '<%= name %>.js'
     }
   },
   plugins: {
